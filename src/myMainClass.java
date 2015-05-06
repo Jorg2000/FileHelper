@@ -3,10 +3,11 @@
  */
 public class myMainClass {
     public static void main(String[] args) {
-        System.out.println("I love you Motherfucker");
-        Model  md = new Model();
-        String result = md.showDirectoryContent("E:\\");
-        System.out.println(result);
+
+        Model myModel = new Model();
+        Controller myController = new Controller(myModel);
+        View myView = new View(myController);
+        myView.start();
 
     }
 }

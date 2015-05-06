@@ -11,8 +11,23 @@ import java.util.Date;
  */
 public class Model {
 
+    private String currentDirectory = "";
+
+    public Model() {
+        currentDirectory = "C:\\";
+    }
+
+    public String getCurrentDirectory() {
+        return currentDirectory;
+    }
+
+    public void setCurrentDirectory(String currentDirectory) {
+        this.currentDirectory = currentDirectory;
+    }
+
+
     /*
-    * Functions retunrnes string with list of files in directory given as argument.
+    * Function retunrnes string with list of files in directory given as argument.
     *
     * */
 
@@ -27,8 +42,6 @@ public class Model {
 
         if (currentDir.isDirectory()) {
               content = new ArrayList<>(Arrays.asList(currentDir.listFiles()));
-
-
         }
 
         else {
@@ -107,6 +120,53 @@ public class Model {
         String tmp = result.toString();
         return result.toString();
     }
+
+
+    /*
+    * Recursive function for seraching file in directory
+    *
+    * */
+
+
+    public String search(String path, String name) {
+
+        String found = "";
+
+        ArrayList<File> files = null;
+        File currentDir = new File(path);
+        try {
+            if (currentDir.listFiles() != null) {
+                files = new ArrayList<>(Arrays.asList(currentDir.listFiles()));
+            }
+
+
+            for (File fl : files) {
+                if (fl.getName().toLowerCase().contains(name.toLowerCase())) {
+                    found = found + path + "\\" + fl.getName() + "\n";
+                }
+                if (fl.isDirectory()) {
+                    found = found + search(path + "\\" + fl.getName(), name);
+                }
+            }
+        }
+        catch (NullPointerException ex){
+
+        }
+        return found;
+    }
+
+    public String help(){
+        StringBuilder hlp = new StringBuilder();
+        hlp.append("dir - Show directory content \n");
+        hlp.append("cd - enter current directory. Type \"cd\" and press ENTER then type path like D:\\\\DIRECTORY\\\\DIRECTORY end press ENTER \n");
+        hlp.append("help - show command list \n");
+        hlp.append("find - find file in current directory Type find and press ENTER then type name of the file and press ENTER  \n");
+
+        return hlp.toString();
+    }
+
+
+
 
     /*
     * Function for put space betwen every three (3) numbers of length of the file.
