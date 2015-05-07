@@ -7,5 +7,6 @@ public interface IController {
     public String findFile(String path,String name);
     public void setCurrentDirectory(String path);
     public String getCurrentDirectory();
+    public void newkDir(String path, String name);
     public String help();
 }

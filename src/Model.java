@@ -147,6 +147,7 @@ public class Model {
                 if (fl.isDirectory()) {
                     found = found + search(path + "\\" + fl.getName(), name);
                 }
+
             }
         }
         catch (NullPointerException ex){
@@ -155,16 +156,23 @@ public class Model {
         return found;
     }
 
+    public void newDir(String path, String name){
+        File newDir = new File(path + "\\" + name);
+        newDir.mkdir();
+    }
+
+
+
+
     public String help(){
         StringBuilder hlp = new StringBuilder();
         hlp.append("dir - Show directory content \n");
-        hlp.append("cd - enter current directory. Type \"cd\" and press ENTER then type path like D:\\\\DIRECTORY\\\\DIRECTORY end press ENTER \n");
+        hlp.append("cd - enter current directory. Please, type path like D:\\\\DIRECTORY\\\\DIRECTORY end press ENTER \n");
         hlp.append("help - show command list \n");
-        hlp.append("find - find file in current directory Type find and press ENTER then type name of the file and press ENTER  \n");
+        hlp.append("find - find file in current directory.   \n");
 
         return hlp.toString();
     }
-
 
 
 

@@ -17,7 +17,46 @@ public class View {
         while(true){
             System.out.print(controller.getCurrentDirectory() + ">");
             String choice = sc.nextLine();
-            doChoice(choice);
+            //doChoice(choice);
+            doChoiceIf(choice);
+        }
+
+    }
+
+    private void doChoiceIf(String choice){
+        String path = new String();
+        if (choice.toLowerCase().contains("cd ")){
+            path = choice.substring(choice.indexOf(" ") + 1, choice.length());
+            if (path.contains(":")) {
+                controller.setCurrentDirectory(path);
+            }
+            else {
+                controller.setCurrentDirectory(controller.getCurrentDirectory()+ "\\" + path);
+            }
+            System.out.println(controller.getCurrentDirectory());
+        }
+
+        else if (choice.toLowerCase().contains("dir")) {
+            System.out.println(controller.listCurrentDirectory());
+        }
+        else if (choice.toLowerCase().contains("help")) {
+            System.out.println(controller.help());
+        }
+        else if (choice.toLowerCase().contains("find ")) {
+            String key = new String();
+            key = choice.substring(choice.indexOf(" ") + 1, choice.length());
+            System.out.println("Please wait. I am searching for something.");
+            System.out.println(controller.findFile(key));
+        }
+        else if (choice.toLowerCase().contains("md ")) {
+            String name = new String();
+            name = choice.substring(choice.indexOf(" ") + 1, choice.length());
+
+            controller.newkDir(controller.getCurrentDirectory(), name);
+        }
+
+        else {
+            System.out.println("unknown command!");
         }
 
     }
@@ -56,7 +95,6 @@ public class View {
     private void showMainMenu() {
         System.out.println(controller.help());
     }
-
 }
 
 

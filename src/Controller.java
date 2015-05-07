@@ -38,6 +38,11 @@ public class Controller implements IController {
     }
 
     @Override
+    public void newkDir(String path, String name) {
+        model.newDir(path, name);
+    }
+
+    @Override
     public String help() {
         return model.help();
     }
